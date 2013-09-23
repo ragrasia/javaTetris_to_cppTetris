@@ -1,7 +1,7 @@
 #include"TetrisMain.h"
 #include<Windows.h>
 
-//것 모습을 처리하는 부분  
+//것 모습을 처리하는 부분  s
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR nCmdLine, int nCmdShow)
 {
 	const wchar_t CLASS_NAME[] = L"WindowClass";
@@ -9,7 +9,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR nCmdLine, int nCmdShow
 	wc.lpfnWndProc = WindowProc; // <- 화면의 기능을 구현하는 부분
 	wc.hCursor = LoadCursor(NULL, IDC_CROSS);
 	wc.lpszClassName = CLASS_NAME;
-	wc.hInstance = hInstance;
+	wc.hInstance = hInstance; 
 	RegisterClass(&wc);
 
 	RECT rectWindow;
