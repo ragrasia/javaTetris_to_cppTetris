@@ -21,12 +21,18 @@
     <ClInclude Include="TetrisBoard.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="BlockShape.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TetrisMain.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="TetrisBoard.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockShape.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

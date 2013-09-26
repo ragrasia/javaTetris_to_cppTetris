@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "BlockShape.h"
 
 using namespace std;
 

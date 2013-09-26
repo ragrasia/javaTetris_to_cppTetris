@@ -1,6 +1,10 @@
 #pragma once
+
 #include <Windows.h>
+#include <time.h>
+
 #include"TetrisBoard.h"
+
 
 TetrisBoard board;
 

@@ -1,5 +1,9 @@
 #include"TetrisMain.h"
 
+time_t now;
+long checkTime = 0;
+int cont = 0;
+
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR nCmdLine, int nCmdShow)
 {
 	const wchar_t CLASS_NAME[] = L"WindowClass";
@@ -83,13 +87,12 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM IParam)
 			wstring text = board.getGameInfoText();
 
 			hdc = BeginPaint(hwnd, &ps);
-			TextOut(hdc, 100, 100, (LPCWSTR)text.c_str(), text.size());
+			TextOut(hdc, 100, 0, (LPCWSTR)text.c_str(), text.size());
 			EndPaint(hwnd, &ps);
 		}return 0;
 	case WM_CLOSE:
 		{
-			if(MessageBox(hwnd, L"종료합니까?", L"exit", MB_OKCANCEL) == IDOK)
-				DestroyWindow(hwnd);
+			DestroyWindow(hwnd);
 		}return 0;
 	}
 	return DefWindowProc(hwnd, uMsg, wParam, IParam);

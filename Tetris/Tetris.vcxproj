@@ -78,10 +78,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BlockShape.h" />
     <ClInclude Include="TetrisBoard.h" />
     <ClInclude Include="TetrisMain.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BlockShape.cpp" />
     <ClCompile Include="TetrisBoard.cpp" />
     <ClCompile Include="TetrisMain.cpp" />
   </ItemGroup>
