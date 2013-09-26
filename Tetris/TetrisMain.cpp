@@ -1,10 +1,9 @@
 #include"TetrisMain.h"
-#include<Windows.h>
 
-//것 모습을 처리하는 부분  s
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR nCmdLine, int nCmdShow)
 {
 	const wchar_t CLASS_NAME[] = L"WindowClass";
+
 	WNDCLASS wc = { }; // <- 구현할 화면의 형태에 대해 정의 하는 부분이다.
 	wc.lpfnWndProc = WindowProc; // <- 화면의 기능을 구현하는 부분
 	wc.hCursor = LoadCursor(NULL, IDC_CROSS);
@@ -22,7 +21,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR nCmdLine, int nCmdShow
 	LONG x = LONG((rectWindow.right - width) / 2);
 	LONG y = LONG((rectWindow.bottom - height) / 2);
 
-	HWND hwnd = CreateWindowEx(
+	HWND hwnd = CreateWindowEx( //WNDCLASS 객체를 가지고 몇몇 설정을 추가하여 화면을 구성한다.
 		0,
 		CLASS_NAME,
 		L"Tetris!",
@@ -40,6 +39,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR nCmdLine, int nCmdShow
 
 	MSG msg = { };
 	bool onLoop = true;
+
+	board = TetrisBoard();
+	board.setGameInfoText(L"new board");
+
 	/* 
 	PeekMessage함수는 GetMessage와 비슷하다. 한가지 다른점은 wRemoveMsg 이다.
 
@@ -68,16 +71,20 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM IParam)
 	{
 	case WM_KEYDOWN:
 		{
-			 //TODO 키 입력 처리 
+			//TODO 키 입력 처리 
 		}return 0;
 
 	case WM_DESTROY:PostQuitMessage(0); return 0;
 	case WM_PAINT: //WM_PAINT는 다른 메시지와는 달리 그릴게 없다고 하더라도 메시지 처리코드를 비워두어선 안된다.
 		{
+			HDC hdc;
 			PAINTSTRUCT ps;
-			HDC hdc = BeginPaint(hwnd, &ps);
-			FillRect(hdc, &ps.rcPaint, (HBRUSH)(COLOR_WINDOW+5));
-			EndPaint(hwnd,&ps);
+
+			wstring text = board.getGameInfoText();
+
+			hdc = BeginPaint(hwnd, &ps);
+			TextOut(hdc, 100, 100, (LPCWSTR)text.c_str(), text.size());
+			EndPaint(hwnd, &ps);
 		}return 0;
 	case WM_CLOSE:
 		{

@@ -78,9 +78,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="TetrisBoard.h" />
     <ClInclude Include="TetrisMain.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="TetrisBoard.cpp" />
     <ClCompile Include="TetrisMain.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
