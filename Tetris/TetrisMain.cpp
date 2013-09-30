@@ -52,8 +52,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR nCmdLine, int nCmdShow
 	MSG msg = { };
 	bool onLoop = true;
 
-	board = TetrisBoard();
-	board.setGameInfoText(L"new board");
+	board = new TetrisBoard();
+	board->setGameInfoText(L"new board");
 
 	/* 
 	PeekMessage함수는 GetMessage와 비슷하다. 한가지 다른점은 wRemoveMsg 이다.
@@ -92,7 +92,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM IParam)
 			HDC hdc;
 			PAINTSTRUCT ps;
 
-			wstring text = board.getGameInfoText();
+			wstring text = board->getGameInfoText();
 
 			hdc = BeginPaint(hwnd, &ps);
 			TextOut(hdc, 100, 0, (LPCWSTR)text.c_str(), text.size());
