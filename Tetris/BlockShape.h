@@ -32,7 +32,6 @@ public:
 
 	BlockShape rotateRight();
 	BlockShape rotateLeft();
-
 private:
 	TetrisBlocks nowShape;
 	int coords[4][2];

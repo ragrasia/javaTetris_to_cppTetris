@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "BlockShape.h"
+#include "TetrisTimer.h"
 
 using namespace std;
 
@@ -15,7 +16,7 @@ public:
 	
 	BlockShape::TetrisBlocks shapeAt(int x, int y);
 	void start();
-	//그리기 요청 함수
+	bool requestDrawing();
 
 	void setGameInfoText(wstring input);
 
@@ -28,7 +29,7 @@ private:
 	const int BoardWidth = 10;
 	const int BoardHeight = 22;
 
-	// 타이머 객체
+	TetrisTimer *tetristimer;
 
 	bool isFallingFinised;
 	bool isStarted;
@@ -45,7 +46,7 @@ private:
 	wstring gameInfoText;
 
 	//이하 함수
-
+	void repeatAction();
 	void pause();
 	void dropDown();
 	void oneLineDown();

@@ -81,11 +81,13 @@
     <ClInclude Include="BlockShape.h" />
     <ClInclude Include="TetrisBoard.h" />
     <ClInclude Include="TetrisMain.h" />
+    <ClInclude Include="TetrisTimer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BlockShape.cpp" />
     <ClCompile Include="TetrisBoard.cpp" />
     <ClCompile Include="TetrisMain.cpp" />
+    <ClCompile Include="TetrisTimer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
