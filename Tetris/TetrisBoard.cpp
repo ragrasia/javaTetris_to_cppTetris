@@ -2,16 +2,19 @@
 
 TetrisBoard::TetrisBoard(void)
 {
-}
+	//초기화
+	isFallingFinised = false;
+	isStarted = false;
+	isPaused = false;
+	locationX = 0;
+	locationY = 0;
+	countLinesRemoved = 0;
 
-void TetrisBoard::setName(wstring input)
-{
-	name = input;
-}
+	//포커스 가져오기
+	pieceShape = BlockShape();
+	//타이머 객체 설정
 
-wstring TetrisBoard::getName()
-{
-	return name;
+	gameInfoText = L"준비";
 }
 
 void TetrisBoard::setGameInfoText(wstring input)

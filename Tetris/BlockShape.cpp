@@ -67,7 +67,9 @@ int BlockShape::minY(){
 }
 BlockShape BlockShape::rotateRight(){
 	if (nowShape == SquareShape){
-		return;
+		BlockShape square;
+		square.setShape(SquareShape);
+		return square;
 	}
 
 	BlockShape result = BlockShape();
@@ -81,7 +83,9 @@ BlockShape BlockShape::rotateRight(){
 }
 BlockShape BlockShape::rotateLeft(){
 	if (nowShape == SquareShape){
-		return;
+		BlockShape square;
+		square.setShape(SquareShape);
+		return square;
 	}
 
 	BlockShape result = BlockShape();
@@ -94,6 +98,5 @@ BlockShape BlockShape::rotateLeft(){
 	return result;
 }
 
-BlockShape::~BlockShape(void)
-{
+BlockShape::~BlockShape(void){
 }

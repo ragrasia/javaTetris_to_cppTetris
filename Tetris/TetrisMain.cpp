@@ -1,8 +1,16 @@
 #include"TetrisMain.h"
 
-time_t now;
-long checkTime = 0;
-int cont = 0;
+/*
+미구현 요소
+1. TetrisBoard가 구현할 게임 화면에 대한 window api 처리
+2. TetrisBoard class 구현
+3. 자바에서 사용한 timer 대체 쓰레드 클래스
+4. 키 입력 처리
+5. wm_paint 처리(화면 그리기)
+
+구현 요소
+1. 테트리스 블록에 대한 클래스
+*/
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR nCmdLine, int nCmdShow)
 {
