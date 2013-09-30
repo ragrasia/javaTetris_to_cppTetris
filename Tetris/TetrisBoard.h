@@ -37,7 +37,7 @@ private:
 	int locationX;
 	int locationY;
 
-	BlockShape pieceShape;
+	BlockShape *pieceShape;
 	BlockShape::TetrisBlocks board[BoardWidth * BoardHeight];
 
 	int countLinesRemoved;

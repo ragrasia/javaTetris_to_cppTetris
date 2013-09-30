@@ -11,7 +11,7 @@ TetrisBoard::TetrisBoard(void)
 	countLinesRemoved = 0;
 
 	//포커스 가져오기
-	pieceShape = BlockShape();
+	pieceShape = new BlockShape();
 	//타이머 객체 설정
 
 	gameInfoText = L"준비";

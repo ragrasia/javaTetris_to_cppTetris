@@ -1,6 +1,10 @@
 #pragma once
 #include <stdlib.h>
-#include<time.h>
+#ifndef __time_h__
+#define __time_h__
+#include <time.h>
+#endif // !__time_h__
+
 
 class BlockShape
 {
