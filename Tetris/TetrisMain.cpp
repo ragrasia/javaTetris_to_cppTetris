@@ -79,11 +79,40 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR nCmdLine, int nCmdShow
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM IParam)
 {
+
 	switch(uMsg)
 	{
 	case WM_KEYDOWN:
 		{
+			board->gameStateCheak();
 			//TODO 키 입력 처리 
+			switch (wParam)
+			{
+			case 'p'||'P':
+				{
+					board->pause();
+				}
+			case VK_RIGHT:
+				{
+					board->rightMove();
+					break;
+				}
+			case VK_LEFT:
+				{
+					board->leftMove();
+					break;
+				}
+			case VK_UP:
+				{
+					board->turnLeft();
+					break;
+				}
+			case VK_DOWN:
+				{
+					board->turnRight();
+					break;
+				}
+			}
 		}return 0;
 
 	case WM_DESTROY:PostQuitMessage(0); return 0;

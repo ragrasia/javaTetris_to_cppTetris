@@ -151,35 +151,35 @@ bool TetrisBoard::tryMove(BlockShape *newPiece, int newX, int newY){
 void TetrisBoard::removeFullLines(){
 	int countFullLines = 0; // 이 메소드 내에서 제거하는 라인의 수
 
-		for (int checkHeight = BoardHeight - 1; checkHeight >= 0; --checkHeight) {
-			bool lineIsFull = true;// 라인에 대한 상태
+	for (int checkHeight = BoardHeight - 1; checkHeight >= 0; --checkHeight) {
+		bool lineIsFull = true;// 라인에 대한 상태
 
-			// 해당하는 라인에서 하나라도 빈 블록이 있는지 확인
-			for (int checkWidth = 0; checkWidth < BoardWidth; ++checkWidth) {
-				if (shapeAt(checkWidth, checkHeight) == BlockShape::NoShape) {
-					lineIsFull = false;
-					break;
-				}
-			}
-
-			if (lineIsFull) {
-				++countFullLines;
-				// 지워진 라인 위의 블록을 아래로 이동
-				for (int k = checkHeight; k < BoardHeight - 1; ++k) {
-					for (int j = 0; j < BoardWidth; ++j) {
-						board[(k * BoardWidth) + j] = shapeAt(j, k + 1);
-					}
-				}
+		// 해당하는 라인에서 하나라도 빈 블록이 있는지 확인
+		for (int checkWidth = 0; checkWidth < BoardWidth; ++checkWidth) {
+			if (shapeAt(checkWidth, checkHeight) == BlockShape::NoShape) {
+				lineIsFull = false;
+				break;
 			}
 		}
 
-		if (countFullLines > 0) {
-			countLinesRemoved += countFullLines;
-			setGameInfoText(L"score : " + countLinesRemoved);
-			isFallingFinised = true;
-			pieceShape->setShape(BlockShape::NoShape);
-			requestDrawing();
+		if (lineIsFull) {
+			++countFullLines;
+			// 지워진 라인 위의 블록을 아래로 이동
+			for (int k = checkHeight; k < BoardHeight - 1; ++k) {
+				for (int j = 0; j < BoardWidth; ++j) {
+					board[(k * BoardWidth) + j] = shapeAt(j, k + 1);
+				}
+			}
 		}
+	}
+
+	if (countFullLines > 0) {
+		countLinesRemoved += countFullLines;
+		setGameInfoText(L"score : " + countLinesRemoved);
+		isFallingFinised = true;
+		pieceShape->setShape(BlockShape::NoShape);
+		requestDrawing();
+	}
 }
 
 void TetrisBoard::setGameInfoText(wstring input)
@@ -192,6 +192,27 @@ wstring TetrisBoard::getGameInfoText()
 	return gameInfoText;
 }
 
+void TetrisBoard::leftMove(){
+	tryMove(pieceShape, locationX - 1, locationY);
+}
+void TetrisBoard::rightMove(){
+	tryMove(pieceShape, locationX + 1, locationY);
+}
+void TetrisBoard::turnLeft(){
+	tryMove(pieceShape->rotateLeft, locationX, locationY);
+}
+void TetrisBoard::turnRight(){
+	tryMove(pieceShape->rotateRight, locationX, locationY);
+}
+void TetrisBoard::gameStateCheak(){
+	if(!isStarted || pieceShape->getShape == BlockShape::NoShape){
+		return;
+	}
+
+	if(isPaused){
+		return;
+	}
+}
 TetrisBoard::~TetrisBoard(void)
 {
 }

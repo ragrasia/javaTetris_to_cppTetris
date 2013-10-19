@@ -21,6 +21,14 @@ public:
 
 	wstring getGameInfoText();
 
+	void leftMove();
+	void rightMove();
+	void turnRight();
+	void turnLeft();
+
+	void gameStateCheak();
+	void pause();
+
 	~TetrisBoard(void);
 
 private:
@@ -44,7 +52,6 @@ private:
 
 	//이하 함수
 	void repeatAction();
-	void pause();
 	void dropDown();
 	void oneLineDown();
 	void clearBoard();

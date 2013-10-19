@@ -3,7 +3,7 @@
 #ifndef __time_h__
 #define __time_h__
 #include <time.h>
-#endif // !__time_h__
+#endif // !__time_h__ 중복 헤더 선언 처리
 
 
 class BlockShape
