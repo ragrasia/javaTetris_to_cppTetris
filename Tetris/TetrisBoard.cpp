@@ -193,19 +193,19 @@ wstring TetrisBoard::getGameInfoText()
 }
 
 void TetrisBoard::leftMove(){
-	tryMove(pieceShape, locationX - 1, locationY);
+	TetrisBoard::tryMove(pieceShape, locationX - 1, locationY);
 }
 void TetrisBoard::rightMove(){
-	tryMove(pieceShape, locationX + 1, locationY);
+	TetrisBoard::tryMove(pieceShape, locationX + 1, locationY);
 }
 void TetrisBoard::turnLeft(){
-	tryMove(pieceShape->rotateLeft, locationX, locationY);
+	TetrisBoard::tryMove(pieceShape->rotateLeft(), locationX, locationY);
 }
 void TetrisBoard::turnRight(){
-	tryMove(pieceShape->rotateRight, locationX, locationY);
+	TetrisBoard::tryMove(pieceShape->rotateRight(), locationX, locationY);
 }
 void TetrisBoard::gameStateCheak(){
-	if(!isStarted || pieceShape->getShape == BlockShape::NoShape){
+	if(!isStarted || pieceShape->getShape() == BlockShape::NoShape){
 		return;
 	}
 

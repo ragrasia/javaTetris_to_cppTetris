@@ -30,8 +30,8 @@ public:
 	int minX();
 	int minY();
 
-	BlockShape rotateRight();
-	BlockShape rotateLeft();
+	BlockShape *rotateRight();
+	BlockShape *rotateLeft();
 private:
 	TetrisBlocks nowShape;
 	int coords[4][2];

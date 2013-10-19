@@ -65,11 +65,11 @@ int BlockShape::minY(){
 	}
 	return min;
 }
-BlockShape BlockShape::rotateRight(){
+BlockShape *BlockShape::rotateRight(){
 	if (nowShape == SquareShape){
 		BlockShape square;
 		square.setShape(SquareShape);
-		return square;
+		return &square;
 	}
 
 	BlockShape result = BlockShape();
@@ -79,13 +79,13 @@ BlockShape BlockShape::rotateRight(){
 		result.setX(i, getY(i));
 		result.setY(i, -getX(i));
 	}
-	return result;
+	return &result;
 }
-BlockShape BlockShape::rotateLeft(){
+BlockShape *BlockShape::rotateLeft(){
 	if (nowShape == SquareShape){
 		BlockShape square;
 		square.setShape(SquareShape);
-		return square;
+		return &square;
 	}
 
 	BlockShape result = BlockShape();
@@ -95,7 +95,7 @@ BlockShape BlockShape::rotateLeft(){
 		result.setX(i, -getY(i));
 		result.setY(i, getX(i));
 	}
-	return result;
+	return &result;
 }
 
 BlockShape::~BlockShape(void){
