@@ -1,4 +1,4 @@
-#include "BlockShape.h"
+﻿#include "BlockShape.h"
 
 BlockShape::BlockShape(void){
 	setShape(NoShape);

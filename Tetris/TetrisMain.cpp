@@ -1,30 +1,31 @@
-#include"TetrisMain.h"
+ï»¿#include"TetrisMain.h"
 
 /*
-¹Ì±¸Çö ¿ä¼Ò
-1. TetrisBoard°¡ ±¸ÇöÇÒ °ÔÀÓ È­¸é¿¡ ´ëÇÑ window api Ã³¸®
-2. TetrisBoard class ±¸Çö
-3. ÀÚ¹Ù¿¡¼­ »ç¿ëÇÑ timer ´ëÃ¼ ¾²·¹µå Å¬·¡½º
-4. Å° ÀÔ·Â Ã³¸®
-5. wm_paint Ã³¸®(È­¸é ±×¸®±â)
+ë¯¸êµ¬í˜„ ìš”ì†Œ
+1. TetrisBoardê°€ êµ¬í˜„í•  ê²Œì„ í™”ë©´ì— ëŒ€í•œ window api ì²˜ë¦¬
+2. TetrisBoard class êµ¬í˜„
+3. ìë°”ì—ì„œ ì‚¬ìš©í•œ timer ëŒ€ì²´ ì“°ë ˆë“œ í´ë˜ìŠ¤
+4. í‚¤ ì…ë ¥ ì²˜ë¦¬
+5. wm_paint ì²˜ë¦¬(í™”ë©´ ê·¸ë¦¬ê¸°)
 
-±¸Çö ¿ä¼Ò
-1. Å×Æ®¸®½º ºí·Ï¿¡ ´ëÇÑ Å¬·¡½º
+êµ¬í˜„ ìš”ì†Œ
+1. í…ŒíŠ¸ë¦¬ìŠ¤ ë¸”ë¡ì— ëŒ€í•œ í´ë˜ìŠ¤
 */
 
+#pragma warning(suppress: 28251)
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR nCmdLine, int nCmdShow)
 {
 	const wchar_t CLASS_NAME[] = L"WindowClass";
 
-	WNDCLASS wc = { }; // <- ±¸ÇöÇÒ È­¸éÀÇ ÇüÅÂ¿¡ ´ëÇØ Á¤ÀÇ ÇÏ´Â ºÎºĞÀÌ´Ù.
-	wc.lpfnWndProc = WindowProc; // <- È­¸éÀÇ ±â´ÉÀ» ±¸ÇöÇÏ´Â ºÎºĞ
+	WNDCLASS wc = { }; // <- êµ¬í˜„í•  í™”ë©´ì˜ í˜•íƒœì— ëŒ€í•´ ì •ì˜ í•˜ëŠ” ë¶€ë¶„ì´ë‹¤.
+	wc.lpfnWndProc = WindowProc; // <- í™”ë©´ì˜ ê¸°ëŠ¥ì„ êµ¬í˜„í•˜ëŠ” ë¶€ë¶„
 	wc.hCursor = LoadCursor(NULL, IDC_CROSS);
 	wc.lpszClassName = CLASS_NAME;
 	wc.hInstance = hInstance; 
 	RegisterClass(&wc);
 
 	RECT rectWindow;
-	//GetWindowRect(¾òÀ¸·Á´Â È­¸éÀÇ hwnd, Á¤º¸¸¦ ÀúÀåÇÏ´Â rect °´Ã¼)
+	//GetWindowRect(ì–»ìœ¼ë ¤ëŠ” í™”ë©´ì˜ hwnd, ì •ë³´ë¥¼ ì €ì¥í•˜ëŠ” rect ê°ì²´)
 	GetWindowRect(GetDesktopWindow(), &rectWindow);
 
 	LONG width = 300;
@@ -33,7 +34,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR nCmdLine, int nCmdShow
 	LONG x = LONG((rectWindow.right - width) / 2);
 	LONG y = LONG((rectWindow.bottom - height) / 2);
 
-	HWND hwnd = CreateWindowEx( //WNDCLASS °´Ã¼¸¦ °¡Áö°í ¸î¸î ¼³Á¤À» Ãß°¡ÇÏ¿© È­¸éÀ» ±¸¼ºÇÑ´Ù.
+	HWND hwnd = CreateWindowEx( //WNDCLASS ê°ì²´ë¥¼ ê°€ì§€ê³  ëª‡ëª‡ ì„¤ì •ì„ ì¶”ê°€í•˜ì—¬ í™”ë©´ì„ êµ¬ì„±í•œë‹¤.
 		0,
 		CLASS_NAME,
 		L"Tetris!",
@@ -56,12 +57,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR nCmdLine, int nCmdShow
 	board->setGameInfoText(L"new board");
 
 	/* 
-	PeekMessageÇÔ¼ö´Â GetMessage¿Í ºñ½ÁÇÏ´Ù. ÇÑ°¡Áö ´Ù¸¥Á¡Àº wRemoveMsg ÀÌ´Ù.
+	PeekMessageí•¨ìˆ˜ëŠ” GetMessageì™€ ë¹„ìŠ·í•˜ë‹¤. í•œê°€ì§€ ë‹¤ë¥¸ì ì€ wRemoveMsg ì´ë‹¤.
 
-	GetMessage Á¾·á°¡ ¾Æ´Ñ ÀÌ»ó Ç×»ó true¸¦ ¹İÈ¯ÇÏ¸ç ¸Ş¼¼Áö°¡ ¾øÀ¸¸é ±â´Ù¸°´Ù.
-	PeekMessage ¸Ş¼¼Áö°¡ ¾øÀ¸¸é falseÀ» ¹İÈ¯ÇÑ´Ù.
-	- Á¦°ÅÇÃ·¡±×´Â PM_NOREMOVE, PM_REMOVEÀÌ ÀÖ´Âµ¥ PM_NOREMOVE  ¸Ş½ÃÁö Å¥¿¡¼­ ¸Ş½ÃÁö¸¦ Á¦°ÅÇÏÁö ¾Ê´Â´Ù.
-	PM_REMOVEÀÌ   ¸Ş½ÃÁö Å¥¿¡¼­ ¸Ş½ÃÁö¸¦ Á¦°Å ´ëºÎºĞÀÇ °æ¿ì´Â ¸Ş½ÃÁöÅ¥¿¡¼­ ¸Ş½ÃÁö¸¦ Á¦°ÅÇÑ´Ù.
+	GetMessage ì¢…ë£Œê°€ ì•„ë‹Œ ì´ìƒ í•­ìƒ trueë¥¼ ë°˜í™˜í•˜ë©° ë©”ì„¸ì§€ê°€ ì—†ìœ¼ë©´ ê¸°ë‹¤ë¦°ë‹¤.
+	PeekMessage ë©”ì„¸ì§€ê°€ ì—†ìœ¼ë©´ falseì„ ë°˜í™˜í•œë‹¤.
+	- ì œê±°í”Œë˜ê·¸ëŠ” PM_NOREMOVE, PM_REMOVEì´ ìˆëŠ”ë° PM_NOREMOVE  ë©”ì‹œì§€ íì—ì„œ ë©”ì‹œì§€ë¥¼ ì œê±°í•˜ì§€ ì•ŠëŠ”ë‹¤.
+	PM_REMOVEì´   ë©”ì‹œì§€ íì—ì„œ ë©”ì‹œì§€ë¥¼ ì œê±° ëŒ€ë¶€ë¶„ì˜ ê²½ìš°ëŠ” ë©”ì‹œì§€íì—ì„œ ë©”ì‹œì§€ë¥¼ ì œê±°í•œë‹¤.
 	*/
 	while(onLoop){
 		if(msg.message == WM_QUIT)
@@ -85,12 +86,13 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM IParam)
 	case WM_KEYDOWN:
 		{
 			board->gameStateCheak();
-			//TODO Å° ÀÔ·Â Ã³¸® 
+			//TODO í‚¤ ì…ë ¥ ì²˜ë¦¬ 
 			switch (wParam)
 			{
 			case 'p'||'P':
 				{
 					board->pause();
+					break;
 				}
 			case VK_RIGHT:
 				{
@@ -116,7 +118,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM IParam)
 		}return 0;
 
 	case WM_DESTROY:PostQuitMessage(0); return 0;
-	case WM_PAINT: //WM_PAINT´Â ´Ù¸¥ ¸Ş½ÃÁö¿Í´Â ´Ş¸® ±×¸±°Ô ¾ø´Ù°í ÇÏ´õ¶óµµ ¸Ş½ÃÁö Ã³¸®ÄÚµå¸¦ ºñ¿öµÎ¾î¼± ¾ÈµÈ´Ù.
+	case WM_PAINT: //WM_PAINTëŠ” ë‹¤ë¥¸ ë©”ì‹œì§€ì™€ëŠ” ë‹¬ë¦¬ ê·¸ë¦´ê²Œ ì—†ë‹¤ê³  í•˜ë”ë¼ë„ ë©”ì‹œì§€ ì²˜ë¦¬ì½”ë“œë¥¼ ë¹„ì›Œë‘ì–´ì„  ì•ˆëœë‹¤.
 		{
 			HDC hdc;
 			PAINTSTRUCT ps;

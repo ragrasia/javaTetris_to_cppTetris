@@ -1,9 +1,9 @@
-#pragma once
+ï»¿#pragma once
 #include <stdlib.h>
 #ifndef __time_h__
 #define __time_h__
 #include <time.h>
-#endif // !__time_h__ Áßº¹ Çì´õ ¼±¾ğ Ã³¸®
+#endif // !__time_h__ ì¤‘ë³µ í—¤ë” ì„ ì–¸ ì²˜ë¦¬
 
 
 class BlockShape
